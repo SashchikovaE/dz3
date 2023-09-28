@@ -4,94 +4,133 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dz3
+namespace task2
 {
+    enum Week
+    {
+        Monday = 1,
+        Tuesday = 2,
+        Wednesday = 3,
+        Thursday = 4,
+        Friday = 5,
+        Saturday = 6,
+        Sunday = 7
+    }
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("упражнение 4.1, упражнение 4.2, дз 4.1");
-            Console.WriteLine("введите номер года");
-            if (int.TryParse(Console.ReadLine(), out int year))
+            Console.WriteLine("упражнение 1"); 
+            int[] sequence = new int[10];
+            try
             {
-                if (year > 0)
+                for (int i = 0; i < 10; i++)
                 {
-                    byte leap = 0;
-                    if (((year % 4 == 0) & (year % 100 != 0)) | (year % 400 == 0))
+                    Console.Write($"введите {i + 1}-ое число последовательности: ");
+                    sequence[i] = Convert.ToInt32(Console.ReadLine());
+                }
+                bool x = true;
+                for (int i = 0; i < sequence.Length - 1; i++)
+                {
+                    if (sequence[i] >= sequence[i + 1])
                     {
-                        Console.WriteLine("вы выбрали високосный год, введите число от 1 до 366");
-                        leap++;
+                        Console.WriteLine($"возрастающая последовательность прерывается после {i + 1}-го элемента");
+                        x = false;
+                        break;
                     }
-                    else
-                    {
-                        Console.WriteLine("вы выбрали не високосный год, введите число от 1 до 365");
-                    }
-                    if (int.TryParse(Console.ReadLine(), out int day))
-                    {
-                        if ((day >= 1) & (day <= 31))
-                        {
-                            Console.WriteLine($"Январь {day}");
-                        }
-                        else if ((day >= 32) & (day <= (59 + leap)))
-                        {
-                            Console.WriteLine($"Февраль {day - 31}");
-                        }
-                        else if ((day >= (60 + leap)) & (day <= (90 + leap)))
-                        {
-                            Console.WriteLine($"Март {day - (59 + leap)}");
-                        }
-                        else if ((day >= (91 + leap)) & (day <= (120 + leap)))
-                        {
-                            Console.WriteLine($"Апрель {day - (90 + leap)}");
-                        }
-                        else if ((day >= (121 + leap)) & (day <= (151 + leap)))
-                        {
-                            Console.WriteLine($"Май {day - (120 + leap)}");
-                        }
-                        else if ((day >= (152 + leap)) & (day <= (181 + leap)))
-                        {
-                            Console.WriteLine($"Июнь {day - (151 + leap)}");
-                        }
-                        else if ((day >= (182 + leap)) & (day <= (212 + leap)))
-                        {
-                            Console.WriteLine($"Июль {day - (181 + leap)}");
-                        }
-                        else if ((day >= (213 + leap)) & (day <= (243 + leap)))
-                        {
-                            Console.WriteLine($"Август {day - (212 + leap)}");
-                        }
-                        else if ((day >= (244 + leap)) & (day <= (273 + leap)))
-                        {
-                            Console.WriteLine($"Сентябрь {day - (243 + leap)}");
-                        }
-                        else if ((day >= (274 + leap)) & (day <= (304 + leap)))
-                        {
-                            Console.WriteLine($"Октябрь {day - (273 + leap)}");
-                        }
-                        else if ((day >= (305 + leap)) & (day <= (334 + leap)))
-                        {
-                            Console.WriteLine($"Ноябрь {day - (304 + leap)}");
-                        }
-                        else if ((day >= (335 + leap)) & (day <= (365 + leap)))
-                        {
-                            Console.WriteLine($"Декабрь {day - (334 + leap)}");
-                        }
-                        else
-                        {
-                            Console.WriteLine("error");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("error");
-                    }
+                }
+                if (x)
+                {
+                    Console.WriteLine("последовательность является возрастающей");
+                }
+            }
+            catch (System.OverflowException)
+            {
+                Console.WriteLine("error");
+            }
+            catch
+            {
+                Console.WriteLine("error");
+            }
+
+            Console.WriteLine("упражнение 2");
+            Console.Write("Введите число от 6 до 14: ");
+            try
+            {
+                switch (Convert.ToByte(Console.ReadLine()))
+                {
+                    case 6: Console.WriteLine("шестёрка"); break;
+                    case 7: Console.WriteLine("семёрка"); break;
+                    case 8: Console.WriteLine("восьмёрка"); break;
+                    case 9: Console.WriteLine("девятка"); break;
+                    case 10: Console.WriteLine("десятка"); break;
+                    case 11: Console.WriteLine("валет"); break;
+                    case 12: Console.WriteLine("дама"); break;
+                    case 13: Console.WriteLine("король"); break;
+                    case 14: Console.WriteLine("туз"); break;
+                    default: Console.WriteLine("error"); break;
+                }
+            }
+            catch (System.OverflowException)
+            {
+                Console.WriteLine("error");
+            }
+            catch
+            {
+                Console.WriteLine("error");
+            }
+
+            Console.WriteLine("упражнение 3");
+            Console.WriteLine("введите данные");
+            switch (Console.ReadLine().ToLower())
+            {
+                case "jabroni": Console.WriteLine("Patron Tequila"); break;
+                case "school counselor": Console.WriteLine("Anything with Alcohol"); break;
+                case "programmer": Console.WriteLine("Hipster Craft Beer"); break;
+                case "bike gang member": Console.WriteLine("Moonshine"); break;
+                case "politician": Console.WriteLine("Your tax dollars"); break;
+                case "rapper": Console.WriteLine("Cristal"); break;
+                default: Console.WriteLine("Beer"); break;
+            }
+
+            Console.WriteLine("Упражнение 4");
+            Console.WriteLine("Введите число от одного до семи");
+            try
+            {
+                if (byte.TryParse(Console.ReadLine(), out byte day))
+                {
+                    Console.WriteLine(Enum.GetName(typeof(Week), day));
                 }
                 else
                 {
                     Console.WriteLine("error");
                 }
             }
-            else
+            catch
+            {
+                Console.WriteLine("error");
+            }
+
+            Console.WriteLine("упражнение 5"); 
+            byte count = 0;
+            string[] market = new string[10];
+            try
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine($"введите {i + 1}-ый элемент: ");
+                    market[i] = Console.ReadLine();
+                }
+                foreach (string i in market)
+                {
+                    if ((i.ToLower().Equals("hello kitty")) | (i.ToLower().Equals("barbie doll")))
+                    {
+                        count++;
+                    }
+                }
+                Console.WriteLine($"{count} кукол в сумке");
+            }
+            catch
             {
                 Console.WriteLine("error");
             }
